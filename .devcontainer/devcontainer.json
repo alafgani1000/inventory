@@ -1,0 +1,30 @@
+// https://aka.ms/devcontainer.json
+{
+  "name": "Laravel 12 JSX",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "laravel.test",
+  "workspaceFolder": "/var/www/html",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mikestead.dotenv",
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "ryannaddy.laravel-artisan",
+        "onecentlin.laravel5-snippets",
+        "onecentlin.laravel-blade",
+        "bmewburn.vscode-intelephense-client",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github",
+        "gitlab.gitlab-workflow",
+        "mutantdino.resourcemonitor"
+      ],
+      "settings": {}
+    }
+  },
+  "remoteUser": "sail",
+  "postCreateCommand": "chown -R 1000:1000 /var/www/html 2>/dev/null || true"
+  // "forwardPorts": [80, 5173, 8080]
+  // "runServices": [],
+  // "shutdownAction": "none",
+}
