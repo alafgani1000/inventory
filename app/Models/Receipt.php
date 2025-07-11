@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Receipt extends Model
 {
@@ -14,8 +15,12 @@ class Receipt extends Model
 
     protected $primaryKey = 'receipt_id';
     protected $fillable = [
-        'receipt_number', 'po_id', 'receipt_date', 'received_by',
-        'status', 'notes'
+        'receipt_number',
+        'po_id',
+        'receipt_date',
+        'received_by',
+        'status',
+        'notes'
     ];
 
     public function purchaseOrder(): BelongsTo

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stock_adjusments', function (Blueprint $table) {
+        Schema::create('stock_adjust_ments', function (Blueprint $table) {
             $table->id('adjustment_id');
             $table->string('adjustment_number', 50)->unique();
             $table->integer('count_id')->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stock_adjusments');
+        Schema::dropIfExists('stock_adjust_ments');
     }
 };

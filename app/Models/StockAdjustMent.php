@@ -8,14 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class StockAdjusment extends Model
+class StockAdjustMent extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $primaryKey = 'adjustment_id';
     protected $fillable = [
-        'adjustment_number', 'count_id', 'adjustment_date',
-        'adjusted_by', 'approved_by', 'status', 'reason', 'notes'
+        'adjustment_number',
+        'count_id',
+        'adjustment_date',
+        'adjusted_by',
+        'approved_by',
+        'status',
+        'reason',
+        'notes'
     ];
 
     public function inventoryCount(): BelongsTo
