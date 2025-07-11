@@ -3,83 +3,77 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 
 class UserSeeder extends Seeder
 {
     public function run()
     {
+        /* create roles */
+        $roles = [
+            'admin',
+            'manager',
+            'staff',
+            'auditor',
+        ];
+
+        foreach ($roles as $role) {
+            Role::create(['name' => $role]);
+        }
+        /* end create roles */
 
         // User admin
-        User::create([
-            'username' => 'admin',
+        $admin = User::create([
             'password' => Hash::make('admin123'),
             'name' => 'Administrator System',
             'email' => 'admin@inventory.app',
-            'role' => 'admin',
-            'is_active' => true,
         ]);
+        $admin->assignRole('admin');
 
         // User manajer
-        User::create([
-            'username' => 'manager',
+        $manager = User::create([
             'password' => Hash::make('manager123'),
-            'full_name' => 'Manager Gudang',
+            'name' => 'Manager Gudang',
             'email' => 'manager@inventory.app',
-            'role' => 'manager',
-            'is_active' => true,
         ]);
+        $manager->assignRole('manager');
 
         // Staff gudang
         $warehouseStaff = [
             [
-                'username' => 'staff1',
                 'full_name' => 'Staff Gudang 1',
                 'email' => 'staff1@inventory.app',
             ],
             [
-                'username' => 'staff2',
                 'full_name' => 'Staff Gudang 2',
                 'email' => 'staff2@inventory.app',
             ],
             [
-                'username' => 'staff3',
                 'full_name' => 'Staff Gudang 3',
                 'email' => 'staff3@inventory.app',
             ],
         ];
 
         foreach ($warehouseStaff as $staff) {
-            User::create([
-                'username' => $staff['username'],
+            $staff = User::create([
                 'password' => Hash::make('password123'),
-                'full_name' => $staff['full_name'],
+                'name' => $staff['full_name'],
                 'email' => $staff['email'],
-                'role' => 'staff',
-                'is_active' => true,
             ]);
+            $staff->assignRole('staff');
         }
 
         // Auditor
-        User::create([
-            'username' => 'auditor',
+        $auditor = User::create([
             'password' => Hash::make('auditor123'),
-            'full_name' => 'Auditor Sistem',
+            'name' => 'Auditor Sistem',
             'email' => 'auditor@inventory.app',
-            'role' => 'auditor',
-            'is_active' => true,
         ]);
+        $auditor->assignRole('auditor');
 
-        // User tidak aktif
-        User::create([
-            'username' => 'inactive',
-            'password' => Hash::make('password123'),
-            'full_name' => 'User Tidak Aktif',
-            'email' => 'inactive@inventory.app',
-            'role' => 'staff',
-            'is_active' => false,
-        ]);
 
         // Buat beberapa user tambahan secara acak
         $faker = \Faker\Factory::create();
@@ -90,14 +84,12 @@ class UserSeeder extends Seeder
             $firstName = $faker->firstName;
             $lastName = $faker->lastName;
 
-            User::create([
-                'username' => strtolower($firstName . $i),
+            $randomUser = User::create([
                 'password' => Hash::make('password123'),
-                'full_name' => "{$firstName} {$lastName}",
-                'email' => strtolower("{$firstName}.{$lastName}{$i}@inventory.app"),
-                'role' => $role,
-                'is_active' => true,
+                'name' => "{$firstName} {$lastName}",
+                'email' => strtolower("{$firstName}.{$lastName}{$i}@inventory.app")
             ]);
+            $randomUser->assignRole($role);
         }
     }
 }

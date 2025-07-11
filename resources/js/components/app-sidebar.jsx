@@ -3,8 +3,9 @@ import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Link } from '@inertiajs/react';
-import { BookOpen, CircleDollarSign, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, CircleDollarSign, Folder, LayoutGrid, UserIcon } from 'lucide-react';
 import AppLogo from './app-logo';
+import { NavSetting } from './nav-setting';
 
 const mainNavItems = [
     {
@@ -16,6 +17,14 @@ const mainNavItems = [
         title: 'Payroll Check',
         href: '/payroll',
         icon: CircleDollarSign,
+    },
+];
+
+const settingNavItems = [
+    {
+        title: 'User',
+        href: '/user',
+        icon: UserIcon,
     },
 ];
 
@@ -49,6 +58,7 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />
+                <NavSetting items={settingNavItems} />
             </SidebarContent>
 
             <SidebarFooter>
